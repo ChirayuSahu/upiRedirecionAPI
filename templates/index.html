@@ -4,75 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPI Payment API</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS CDN -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #f1f1f1;
-        }
-        input, button {
-            padding: 10px;
-            margin: 5px;
-            width: 90%;
-        }
-
-        /* Responsive text for URL section */
-        .url-text {
-            font-size: 18px;
-            word-wrap: break-word;
-            white-space: normal; /* Allow line breaks for long URLs */
-            margin: 10px 0;
-        }
-
-        /* Media query for small screens */
-        @media (max-width: 600px) {
-            .url-text {
-                font-size: 14px; /* Make the text smaller on mobile */
-            }
-            .container {
-                padding: 15px; /* Adjust container padding on smaller screens */
-            }
+        /* Custom background blur */
+        .backdrop-blur {
+            backdrop-filter: blur(15px);
         }
     </style>
 </head>
-<body>
+<body class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 h-screen flex justify-center items-center">
 
-    <div class="container">
-        <h1>UPI Payment API</h1>
-        <p>Generate UPI payment links instantly.</p>
+    <div class="container backdrop-blur bg-white/30 rounded-xl shadow-lg p-6 w-full max-w-lg text-center">
+        <h1 class="text-3xl font-semibold text-white mb-6">UPI Payment API</h1>
+        <p class="text-white mb-6">Generate UPI payment links and scan the QR code to pay instantly.</p>
 
-        <form action="/generate_upi" method="POST">
-            <input type="text" name="vpa" placeholder="Enter VPA (e.g. vpa@bank)" required>
-            <input type="number" name="amount" placeholder="Enter Amount (e.g. 100)" required>
-            <button type="submit">Generate UPI Link</button>
+        <!-- Form to enter VPA and Amount -->
+        <form action="/generate_upi" method="POST" class="space-y-4">
+            <input type="text" name="vpa" placeholder="Enter VPA (e.g. vpa@bank)" required 
+                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="number" name="amount" placeholder="Enter Amount (e.g. 100)" required 
+                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Generate UPI Link
+            </button>
         </form>
 
-        <p>You can also directly generate the UPI link by visiting the following URL format:</p>
+        <!-- Display QR Code and UPI Link -->
+        {% if qr_code %}
+        <div class="mt-6">
+            <h3 class="text-xl text-white mb-4">Scan the QR Code to Pay</h3>
+            <img href="{{ upi_link }}" class="mx-auto max-w-sm w-full h-auto rounded-lg" src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+            <p class="mt-4 text-white">Click the QR Code to open your UPI app:</p>
+        </div>
+        {% endif %}
 
-        <p class="url-text">https://upi-redirection-api.vercel.app/upi/vpa@bank&amount</p>
-        <p>This will automatically redirect to your UPI app with the payment details.</p>
-
+        <footer class="mt-6 text-white">
+            Created with ❤️ by Chirayu
+        </footer>
     </div>
-
-    <footer>
-        Created with ❤️ by Chirayu
-    </footer>
 
 </body>
 </html>
