@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Redirection Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            margin: 5px 0;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body align="center">
+    <h1>UPI Redirection Example</h1>
+    <p>This API allows you to generate a UPI payment link by specifying the following details:</p>
+    <ul>
+        <li><strong>VPA (Virtual Payment Address)</strong>: Your UPI ID (e.g., yourname@bank)</li>
+        <li><strong>Bank</strong>: The bank name associated with your UPI ID (e.g., icici)</li>
+        <li><strong>Amount</strong>: The amount to be paid (e.g., 100)</li>
+    </ul>
+    <p>To use the API, you can either input the details in the form below or manually construct the URL in this format:</p>
+    <pre>chirayusahu.is-a.dev/upi/vpa@bank&amount</pre>
+
+    <h2>Generate UPI Payment Link</h2>
+    <form action="/generate_upi" method="POST">
+        <label for="vpa">VPA (e.g., yourname@bank):</label><br>
+        <input type="text" id="vpa" name="vpa" required><br>
+        
+        <label for="bank">Bank (e.g., icici):</label><br>
+        <input type="text" id="bank" name="bank" required><br>
+        
+        <label for="amount">Amount (e.g., 100):</label><br>
+        <input type="number" id="amount" name="amount" required><br><br>
+        
+        <input type="submit" value="Generate UPI Link">
+    </form>
+
+    <p>If you want to manually generate a link, visit the following format:</p>
+    <pre>chirayusahu.is-a.dev/upi/vpa@bank&amount</pre>
+
+</body>
+</html>
