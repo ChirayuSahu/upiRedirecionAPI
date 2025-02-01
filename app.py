@@ -7,25 +7,41 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/generate_upi', methods=['POST'])
+def generate_upi():
+    """Handles form submission and redirects to UPI payment link"""
+    try:
+        vpa = request.form.get('vpa')
+        amount = request.form.get('amount')
+
+        if not vpa or not amount:
+            return "Error: VPA and Amount are required.", 400
+
+        # Generate UPI deep link
+        upi_url = f"upi://pay?pa={urllib.parse.quote(vpa)}&am={amount}&cu=INR"
+
+        return redirect(upi_url)
+
+    except Exception as e:
+        return f"Error: {str(e)}", 400
+
 @app.route('/upi/<path:params>', methods=['GET'])
-def generate_upi(params):
+def upi_api(params):
+    """Handles direct API access via URL"""
     try:
         decoded_params = urllib.parse.unquote(params)
-        vpa, rest = decoded_params.split('@')
-        bank, amount = rest.split('&')
-        upi_url = f"upi://pay?pa={vpa}@{bank}&am={amount}&cu=INR"
+        if '&' not in decoded_params:
+            return "Error: Invalid format. Use /upi/vpa@bank&amount", 400
+        
+        vpa, amount = decoded_params.split('&')
+
+        # Generate UPI deep link
+        upi_url = f"upi://pay?pa={urllib.parse.quote(vpa)}&am={amount}&cu=INR"
+
         return redirect(upi_url)
+
     except Exception as e:
-        return f"Error: Invalid format - {str(e)}", 400
+        return f"Error: {str(e)}", 400
 
-@app.route('/generate_upi', methods=['POST'])
-def generate_upi_from_form():
-    vpa = request.form['vpa']
-    bank = request.form['bank']
-    amount = request.form['amount']
-    upi_url = f"upi://pay?pa={vpa}@{bank}&am={amount}&cu=INR"
-    return redirect(upi_url)
-
-# Only for local development, Vercel doesn't use this
 if __name__ == '__main__':
     app.run(debug=True)
