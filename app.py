@@ -37,10 +37,24 @@ def upi_redirect(vpa_and_amount):
     # Process the URL parameters
     try:
         vpa, amount = vpa_and_amount.split('&')
-        amount = amount  # Get the amount after the `=`
         
+        # Construct the UPI link
         upi_link = f"upi://pay?pa={vpa}&am={amount}&cu=INR"
-        return redirect(upi_link)
+        
+        # Generate QR code for the UPI link
+        qr = qrcode.make(upi_link)
+        
+        # Save the QR code as an image in memory
+        img = io.BytesIO()
+        qr.save(img, format='PNG')
+        img.seek(0)  # Reset the pointer to the beginning
+        
+        # Convert image to base64 encoding
+        qr_code_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+        
+        # Render a new page to show payment details and QR code
+        return render_template('upi_payment_page.html', vpa=vpa, amount=amount, qr_code=qr_code_base64)
+    
     except Exception as e:
         return f"Error: {e}", 400
 
