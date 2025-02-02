@@ -1,4 +1,6 @@
 
+<img src="https://socialify.git.ci/ChirayuSahu/upiRedirectionAPI/image?language=1&name=1&owner=1&stargazers=1&theme=Dark" alt="upiRedirectionAPI" width="640" height="320" />
+
 # UPI Payment API
 
 A simple API that generates UPI payment links and QR codes for easy transactions. This web application allows users to generate UPI payment links by providing the Virtual Payment Address (VPA) and the payment amount. The generated UPI link can be used to redirect users to their UPI apps like Google Pay, PhonePe, etc.
