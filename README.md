@@ -1,5 +1,5 @@
 
-<img src="https://socialify.git.ci/ChirayuSahu/upiRedirectionAPI/image?language=1&name=1&owner=1&stargazers=1&theme=Dark" alt="upiRedirectionAPI" width="640" height="320" />
+<img src="https://socialify.git.ci/ChirayuSahu/upiRedirectionAPI/image?language=1&name=1&owner=1&stargazers=1&theme=Dark" alt="upiRedirectionAPI"/>
 
 # UPI Payment API
 
