@@ -37,8 +37,7 @@ def upi_redirect(vpa_and_amount):
     # Process the URL parameters
     try:
         vpa, amount = vpa_and_amount.split('&')
-        vpa = vpa.split('@')[0] + '@' + vpa.split('@')[1]  # Handle `vpa@bank`
-        amount = amount.split('=')[1]  # Get the amount after the `=`
+        amount = amount  # Get the amount after the `=`
         
         upi_link = f"upi://pay?pa={vpa}&am={amount}&cu=INR"
         return redirect(upi_link)
