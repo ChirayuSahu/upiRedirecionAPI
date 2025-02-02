@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPI Payment API</title>
     <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <style>
         /* Custom background blur */
         .backdrop-blur {
@@ -12,11 +13,11 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 h-screen flex justify-center items-center">
+<body class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 h-screen flex justify-center items-center" style="font-family: 'Poppins', sans-serif;">
 
-    <div class="container backdrop-blur bg-white/30 rounded-xl shadow-lg p-6 w-full max-w-lg text-center">
-        <h1 class="text-3xl font-semibold text-white mb-6">UPI Payment API</h1>
-        <p class="text-white mb-6">Generate UPI payment links and scan the QR code to pay instantly.</p>
+    <div class="container backdrop-blur bg-white rounded-xl shadow-lg p-6 w-full max-w-lg text-center">
+        <h1 class="text-3xl font-semibold text-blue-500 mb-6">UPI Payment API</h1>
+        <p class="text-black mb-6">Generate UPI payment links and scan the QR code to pay instantly.</p>
 
         <!-- Form to enter VPA and Amount -->
         <form action="/generate_upi" method="POST" class="space-y-4">
@@ -27,14 +28,13 @@
             <button type="submit" class="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Generate UPI Link
             </button>
-            <div class="text-white">
-                <p>You can also directly generate the UPI link by visiting the following URL format:</p>
-                <p>https://upi-redirection-api.vercel.app/upi/vpa@bank&amount</p>
-                <p>This will automatically redirect to your UPI app with the payment details.</p>
+            <div class="text-black">
+                <p>You can also directly generate the UPI link.</p>
+                <p>Check <a class="text-blue-600 underline hover:no-underline" href="https://github.com/ChirayuSahu/upiRedirectionAPI" target="_blank">Github Repository</a> for documentation.</p>
             </div>
         </form>
 
-        <footer class="mt-6 text-white">
+        <footer class="mt-6 text-blue-600">
             Created with ❤️ by Chirayu
         </footer>
     </div>
