@@ -22,7 +22,7 @@
         <form action="/generate_upi" method="POST" class="space-y-4">
             <input type="text" name="vpa" placeholder="Enter VPA (e.g. vpa@bank)" required 
                 class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="number" name="amount" placeholder="Enter Amount (e.g. 100)" required 
+            <input type="number" id="amount" step="0.01" name="amount" placeholder="Enter Amount (e.g. 100)" required 
                 class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <button type="submit" class="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Generate UPI Link
@@ -34,19 +34,11 @@
             </div>
         </form>
 
-        <!-- Display QR Code and UPI Link -->
-        {% if qr_code %}
-        <div class="mt-6">
-            <h3 class="text-xl text-white mb-4">Scan the QR Code to Pay</h3>
-            <img href="{{ upi_link }}" class="mx-auto max-w-sm w-full h-auto rounded-lg" src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
-            <p class="mt-4 text-white">Click the QR Code to open your UPI app:</p>
-        </div>
-        {% endif %}
-
         <footer class="mt-6 text-white">
             Created with ❤️ by Chirayu
         </footer>
     </div>
+      
 
 </body>
 </html>
