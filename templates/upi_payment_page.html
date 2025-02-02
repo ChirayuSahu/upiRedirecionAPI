@@ -65,7 +65,8 @@
     }
 
     .payment-options img {
-      width: 120px;
+      height: 50px; /* Set a width for all payment logos */
+      width: auto; /* Let the height scale automatically based on width */
       margin: 0 20px;
       cursor: pointer;
       transition: transform 0.3s ease;
@@ -93,7 +94,7 @@
       }
 
       .payment-options img {
-        width: 100px;
+        height: 50px; /* Adjust width for smaller screens */
         margin: 0 15px;
       }
 
@@ -112,7 +113,7 @@
       }
 
       .payment-options img {
-        width: 90px;
+        height: 40px; /* Adjust width for very small screens */
         margin: 0 10px;
       }
 
@@ -138,11 +139,11 @@
     <div class="payment-options">
       <h3>Pay using:</h3>
       <div>
-        <a style="text-decoration: none;" href="tez://upi/pay?pa={{ vpa }}&am={{ amount }}&cu=INR">
+        <a style="text-decoration: none;" href="upi://pay?pa={{ vpa }}&am={{ amount }}&cu=INR">
           <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay">
         </a>
-        <a style="text-decoration: none;" href="phonepe://upi/pay?pa={{ vpa }}&am={{ amount }}&cu=INR">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/640px-PhonePe_Logo.svg.png" alt="PhonePe">
+        <a style="text-decoration: none;" href="upi://pay?pa={{ vpa }}&am={{ amount }}&cu=INR">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
         </a>
       </div>
     </div>
