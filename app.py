@@ -14,23 +14,13 @@ def index():
 def generate_upi():
     vpa = request.form['vpa']
     amount = request.form['amount']
+
+    amount = round(float(amount), 2)
     
     # Construct the UPI link
-    upi_link = f"upi://pay?pa={vpa}&am={amount}&cu=INR"
+    upi_link = f"/upi/{vpa}&{amount}"
     
-    # Generate QR code for the UPI link
-    qr = qrcode.make(upi_link)
-    
-    # Save the QR code as an image in memory
-    img = io.BytesIO()
-    qr.save(img, format='PNG')
-    img.seek(0)  # Reset the pointer to the beginning
-    
-    # Convert image to base64 encoding
-    qr_code_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
-    
-    # Pass the base64-encoded image to the template
-    return render_template('index.html', qr_code=qr_code_base64, upi_link=upi_link)
+    return redirect(upi_link)
 
 @app.route('/upi/<vpa_and_amount>')
 def upi_redirect(vpa_and_amount):
