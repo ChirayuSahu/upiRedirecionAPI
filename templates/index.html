@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +17,14 @@
             transition: transform 0.3s ease;
         }
 
-        .container:hover{
+        .container:hover {
             transform: scale(1.02);
         }
     </style>
 </head>
-<body class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 h-screen flex justify-center items-center" style="font-family: 'Poppins', sans-serif;">
+
+<body class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 h-screen flex justify-center items-center"
+    style="font-family: 'Poppins', sans-serif;">
 
     <div class="container backdrop-blur bg-white rounded-xl shadow-lg p-6 w-full max-w-lg text-center">
         <h1 class="text-3xl font-semibold text-blue-500 mb-6">UPI Payment API</h1>
@@ -29,16 +32,23 @@
 
         <!-- Form to enter VPA and Amount -->
         <form action="/generate_upi" method="POST" class="space-y-4">
-            <input type="text" name="vpa" placeholder="Enter VPA (e.g. vpa@bank)" required 
+            <input type="text" id="vpa" name="vpa" placeholder="Enter VPA (e.g. vpa@bank)" required
                 class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="number" id="amount" step="0.01" name="amount" placeholder="Enter Amount (e.g. 100)" required 
+
+            <input type="number" id="amount" step="0.01" name="amount" placeholder="Enter Amount (e.g. 100)" required
                 class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <button type="submit" class="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <button type="submit" id="submitBtn"
+                class="w-full p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-400 cursor-not-allowed"
+                disabled>
                 Generate UPI Link
             </button>
+
             <div class="text-black">
                 <p>You can also directly generate the UPI link.</p>
-                <p>Check <a class="text-blue-600 underline hover:no-underline" href="https://github.com/ChirayuSahu/upiRedirectionAPI" target="_blank">Github Repository</a> for documentation.</p>
+                <p>Check <a class="text-blue-600 underline hover:no-underline"
+                        href="https://github.com/ChirayuSahu/upiRedirectionAPI" target="_blank">Github Repository</a>
+                    for documentation.</p>
             </div>
         </form>
 
@@ -46,7 +56,34 @@
             Created with ❤️ by Chirayu
         </footer>
     </div>
-      
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const vpaInput = document.getElementById("vpa");
+            const amountInput = document.getElementById("amount");
+            const submitBtn = document.getElementById("submitBtn");
+
+            function validateForm() {
+                const vpaRegex = /^[a-zA-Z0-9.\-_]+@[a-zA-Z0-9.\-_]+$/; // Basic VPA format check
+                const vpaValid = vpaRegex.test(vpaInput.value);
+                const amountValid = parseFloat(amountInput.value) > 0;
+
+                if (vpaValid && amountValid) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+                    submitBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
+                } else {
+                    submitBtn.disabled = true;
+                    submitBtn.classList.remove("bg-blue-600", "hover:bg-blue-700");
+                    submitBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+                }
+            }
+
+            vpaInput.addEventListener("input", validateForm);
+            amountInput.addEventListener("input", validateForm);
+        });
+    </script>
 
 </body>
+
 </html>
