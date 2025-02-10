@@ -20,44 +20,6 @@ A simple API that generates UPI payment links and QR codes for easy transactions
 - **QR Code Generation:** Python's `qrcode` library
 - **Payment Redirection:** Custom UPI links for Google Pay, PhonePe, etc.
 
-## Installation
-
-To run the project locally:
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/ChirayuSahu/upiRedirectionAPI.git
-   cd upiRedirectionAPI
-   ```
-
-2. **Create a Virtual Environment:**
-   ```bash
-   python -m venv venv
-   ```
-
-3. **Activate the Virtual Environment:**
-   - For Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - For macOS/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
-4. **Install the Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Run the Flask Application:**
-   ```bash
-   flask run
-   ```
-
-6. **Visit the App:**
-   Open a browser and go to `http://127.0.0.1:5000/` to use the application locally.
-
 ## Usage
 
 1. **Enter the VPA (Virtual Payment Address):**
@@ -77,7 +39,13 @@ To run the project locally:
 You can directly generate a UPI link by visiting the following URL format:
 
 ```
-https://upi-redirection-api.vercel.app/upi/vpa@bank&amount
+https://upi-redirection-api.vercel.app/qr/vpa@bank&amount
+```
+You can also receive a JSON response and obtain a list of valid UPI endings by using:
+
+```
+https://upi-redirection-api.vercel.app/upi/api/vpa@bank&amount
+https://upi-redirection-api.vercel.app/upi/api/validEndings
 ```
 
 Replace `vpa@bank` with the actual VPA and `amount` with the payment amount.
