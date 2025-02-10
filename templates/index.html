@@ -1,93 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPI Payment API</title>
-    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS CDN -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <title>UPI API Documentation</title>
     <style>
-        /* Custom background blur */
-        .backdrop-blur {
-            backdrop-filter: blur(15px);
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+            overflow: hidden;
         }
 
         .container {
-            transition: transform 0.3s ease;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .container:hover {
-            transform: scale(1.02);
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        code {
+            background: #eee;
+            padding: 4px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .endpoint {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 5px solid #28a745;
+            text-align: left;
         }
     </style>
 </head>
+<body>
 
-<body class="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 h-screen flex justify-center items-center"
-    style="font-family: 'Poppins', sans-serif;">
+    <div class="container">
+        <h1>UPI API Documentation</h1>
+        <p>Welcome to the UPI Payment API. This API allows you to easily integrate UPI payments into your app or website. Below are the available endpoints:</p>
 
-    <div class="container backdrop-blur bg-white rounded-xl shadow-lg p-6 w-full max-w-lg text-center">
-        <h1 class="text-3xl font-semibold text-blue-500 mb-6">UPI Payment API</h1>
-        <p class="text-black mb-6">Generate UPI payment links and scan the QR code to pay instantly.</p>
+        <div class="endpoint">
+            <h3>1. Generate UPI Payment Link</h3>
+            <p><b>Endpoint:</b> <code>/upi/api/&lt;vpa&gt;&amp;&lt;amount&gt;</code></p>
+            <p><b>Example:</b> <code>/upi/api/user@bank&100</code></p>
+            <p><b>Response:</b> Returns a JSON object with UPI links for payment.</p>
+        </div>
 
-        <!-- Form to enter VPA and Amount -->
-        <form action="/generate_upi" method="POST" class="space-y-4">
-            <input type="text" id="vpa" name="vpa" placeholder="Enter VPA (e.g. vpa@bank)" required
-                class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <div class="endpoint">
+            <h3>2. Generate QR Code</h3>
+            <p><b>Endpoint:</b> <code>/qr/&lt;vpa&gt;&amp;&lt;amount&gt;</code></p>
+            <p><b>Example:</b> <code>/qr/user@bank&100</code></p>
+            <p><b>Response:</b> Displays a QR code for the UPI payment.</p>
+        </div>
 
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">₹</span>
-                <input type="text" id="amount" name="amount" placeholder="Enter Amount (e.g. 100)" required
-                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-                    class="w-full pl-8 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
+        <div class="endpoint">
+            <h3>3. Get List of Valid UPI Endings</h3>
+            <p><b>Endpoint:</b> <code>/upi/api/validEndings</code></p>
+            <p><b>Response:</b> Returns a JSON object with valid UPI endings.</p>
+        </div>
 
-            <button type="submit" id="submitBtn"
-                class="w-full p-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-400 cursor-not-allowed"
-                disabled>
-                Generate UPI Link
-            </button>
+        <p>Use these endpoints to integrate UPI payments into your applications.</p>
+        <p>Check <a style="color: blue;""
+            href="https://github.com/ChirayuSahu/upiRedirectionAPI" target="_blank">Github Repository</a>
+        for documentation.</p>
 
-            <div class="text-black">
-                <p>You can also directly generate the UPI link.</p>
-                <p>Check <a class="text-blue-600 underline hover:no-underline"
-                        href="https://github.com/ChirayuSahu/upiRedirectionAPI" target="_blank">Github Repository</a>
-                    for documentation.</p>
-            </div>
-        </form>
-
-        <footer class="mt-6 text-blue-600">
-            Created with ❤️ by Chirayu
-        </footer>
+        <p class="text-sm">Created by Chirayu</p>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const vpaInput = document.getElementById("vpa");
-            const amountInput = document.getElementById("amount");
-            const submitBtn = document.getElementById("submitBtn");
-
-            function validateForm() {
-                const vpaRegex = /^[a-zA-Z0-9.\-_]+@[a-zA-Z0-9.\-_]+$/; // Basic VPA format check
-                const vpaValid = vpaRegex.test(vpaInput.value);
-                const amountValid = parseFloat(amountInput.value) > 0;
-
-                if (vpaValid && amountValid) {
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
-                    submitBtn.classList.add("bg-blue-600", "hover:bg-blue-700");
-                } else {
-                    submitBtn.disabled = true;
-                    submitBtn.classList.remove("bg-blue-600", "hover:bg-blue-700");
-                    submitBtn.classList.add("bg-gray-400", "cursor-not-allowed");
-                }
-            }
-
-            vpaInput.addEventListener("input", validateForm);
-            amountInput.addEventListener("input", validateForm);
-        });
-    </script>
-
 </body>
-
 </html>
