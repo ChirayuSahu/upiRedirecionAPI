@@ -19,6 +19,8 @@ A simple API that generates UPI payment links and QR codes for easy transactions
 - **Backend:** Python (Flask)
 - **QR Code Generation:** Python's `qrcode` library
 - **Payment Redirection:** Custom UPI links for Google Pay, PhonePe, etc.
+- **JSON Response:** Users can receive a JSON response containing payment details.
+- **Valid UPI Endings:** Provides a list of valid UPI endings for different banks and payment services.
 
 ## Usage
 
