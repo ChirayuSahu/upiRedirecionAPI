@@ -45,6 +45,7 @@ You can also receive a JSON response and obtain a list of valid UPI endings by u
 
 ```
 https://upi-redirection-api.vercel.app/upi/api/vpa@bank&amount
+
 https://upi-redirection-api.vercel.app/upi/api/validEndings
 ```
 
