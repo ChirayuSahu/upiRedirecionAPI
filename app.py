@@ -91,7 +91,7 @@ def valid_endings():
     try:
         return {
             "validEndings": validEndings,
-            "lastUpdated": "2025-02-10 17:11:21",
+            "lastUpdated": "2025-02-10 17:11:21 UTC+5;30",
             "source": "https://www.npci.org.in/what-we-do/upi/3rd-party-apps"
         }
     except Exception as e:
